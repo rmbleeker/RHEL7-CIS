@@ -19,6 +19,11 @@
   changed_when: no
   check_mode: no
 
+- name: "PRELIM | NFS SELinux prereq libsemanage-python package is installed"
+  yum:
+      name: libsemanage-python
+      state: present
+
 - name: "PRELIM | Section 4.1 | Configure System Accounting (auditd)"
   yum:
       name: audit
@@ -67,7 +72,6 @@
   check_mode: no
   tags:
       - skip_ansible_lint #  ANSIBLE0006
-
 
 - name: "PRELIM | Check for chronyd service"
   shell: "systemctl show chronyd | grep LoadState | cut -d = -f 2"
