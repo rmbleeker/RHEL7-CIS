@@ -1,0 +1,27 @@
+---
+
+### Additional hardening of the BR project servers
+
+- name: CUSTOM | Disallow NFS to read/write any file on the system
+  seboolean:
+    name: "{{ item }}"
+    state: no
+    persistent: yes
+  loop:
+    - nfs_export_all_ro
+    - nfs_export_all_rw
+  when: not rhel7cis_nfs_server
+  tags:
+    - nfs
+    - selinux
+
+- name: CUSTOM | Set the root password
+  user:
+    name: root
+    password: "{{ rhel7cis_root_password | password_hash('sha512', 99999999 | random(start=10000000, seed=inventory_hostname) | string) }}"
+    update_password: always
+  tags:
+    - root
+    - password
+
+...
