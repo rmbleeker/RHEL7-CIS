@@ -503,6 +503,8 @@
   find:
       paths: /etc/logrotate.d/
   register: log_rotates
+  when:
+      - rhel7cis_rule_4_3
   tags:
       - level1
       - level2
@@ -517,6 +519,8 @@
   with_items:
       - "{{ log_rotates.files }}"
       - { path: "/etc/logrotate.conf" }
+  when:
+      - rhel7cis_rule_4_3
   tags:
       - level1
       - level2
