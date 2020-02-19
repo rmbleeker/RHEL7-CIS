@@ -1,2 +1,6 @@
 ---
 # vars file for RHEL7-CIS
+
+rhel7cis_bootloader_password: "{{ lookup('vars', ansible_hostname + '_bpass') }}"
+rhel7cis_root_password: "{{ lookup('vars', ansible_hostname + '_rpass') }}"
+
