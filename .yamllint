@@ -4,6 +4,7 @@ ignore: |
   lib/
   include/
   share/
+
 extends: default
 
 rules:
